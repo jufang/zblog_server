@@ -1,0 +1,19 @@
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] MongoDB starting : pid=6044 port=27017 dbpath=D:\myWork\dva\RESTful-blog-server-demo\data 64-bit host=yijufang
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] db version v3.4.5
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] git version: 520b8f3092c48d934f0cd78ab5f40fe594f96863
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] modules: none
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] build environment:
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten]     distarch: x86_64
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-07-06T14:19:28.903+0800 I CONTROL  [initandlisten] options: { storage: { dbPath: "D:\myWork\dva\RESTful-blog-server-demo\data" }, systemLog: { destination: "file", path: "D:\myWork\dva\RESTful-blog-server-demo\log\mongo.log" } }
+2017-07-06T14:19:28.905+0800 E NETWORK  [initandlisten] listen(): bind() failed 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。 for socket: 0.0.0.0:27017
+2017-07-06T14:19:28.905+0800 E NETWORK  [initandlisten] Failed to set up sockets during startup.
+2017-07-06T14:19:28.905+0800 E STORAGE  [initandlisten] Failed to set up listener: InternalError: Failed to set up sockets
+2017-07-06T14:19:28.905+0800 I NETWORK  [initandlisten] shutdown: going to close listening sockets...
+2017-07-06T14:19:28.905+0800 I NETWORK  [initandlisten] shutdown: going to flush diaglog...
+2017-07-06T14:19:28.905+0800 I CONTROL  [initandlisten] now exiting
+2017-07-06T14:19:28.905+0800 I CONTROL  [initandlisten] shutting down with code:48
