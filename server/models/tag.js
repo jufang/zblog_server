@@ -15,6 +15,7 @@ var TagSchema = new Schema({
     toJSON: {
         virtuals: true,
         transform(doc, ret){
+            ret.name = ret.text;
             ret.id = ret._id;
             ret.v = ret.__v;
             delete ret._id;

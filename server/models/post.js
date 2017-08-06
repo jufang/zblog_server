@@ -50,6 +50,7 @@ var PostSchema = new Schema({
     }
 })
 function status(accepted,time){
+  // 0: not accepted, 1: will publish, 2: publishing
   if(!accepted) return 0;
   if(+time >= +new Date()){
     return 1

@@ -2,11 +2,10 @@
 
 import Koa from 'koa';
 import logger from 'koa-logger';
-import bodyParser from 'koa-bodyparser';
+import body from 'koa-body';
 import cors from 'kcors';
 import routes from './api';
 import {config} from './config';
-import json from 'koa-json';
 
 const app = new Koa();
 const session = require('koa-session')
@@ -16,8 +15,7 @@ mongoose.connect(config.DEVELOPMENT);
 
 app.use(logger());
 app.use(cors());
-app.use(bodyParser({}));
-app.use(json())
+app.use(body());
 app.use(session({
 	key: config.SESSION_SECRET,
 	maxAge: 86400000,

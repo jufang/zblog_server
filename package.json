@@ -4,7 +4,6 @@
   "description": "backend server based on restful api",
   "main": "index.js",
   "scripts": {
-    "db": "mongod -dbpath ./data",
     "start": "nodemon ./bin/entry"
   },
   "keywords": [
@@ -18,10 +17,10 @@
     "babel-register": "^6.18.0",
     "kcors": "^2.2.0",
     "koa": "^2.0.0-alpha.7",
-    "koa-bodyparser": "^3.2.0",
-    "koa-json": "^2.0.2",
+    "koa-body": "^2.3.0",
     "koa-logger": "^2.0.0",
     "koa-router": "^7.0.1",
+    "koa-session": "^5.5.0",
     "koa-session-mongoose": "^1.0.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

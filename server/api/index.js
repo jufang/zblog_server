@@ -3,6 +3,7 @@
 import Router from 'koa-router';
 import author from './cms/author';
 import post from './cms/post';
+import client from './client/index';
 
 const router = new Router();
 
@@ -18,7 +19,9 @@ router.use(async (ctx, next) => {
         };
     }
 });
+router.use('/api/v1',client);
 router.use(author);
 router.use(post);
+
 
 export default router.routes();

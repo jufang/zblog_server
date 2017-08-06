@@ -1,82 +1,70 @@
 'use strict';
 
 import Router from 'koa-router';
-import Author from '../..//models/author';
+import Author from '../../models/author';
 const crypto    = require('crypto');
-
-
 const router = new Router({
     prefix: '/cms/api/v1'
 });
 
 //登录与注册
-router.post('/authors/sign-in',function(ctx,next){
+router.post('/authors/sign-in',async (ctx,next)=>{
   const authorD = ctx.request.body.author;
-  Author.findOne({'email':authorD.email},function(e,o){
-    if(o==null){
-      ctx.body = {"errorMessage": "您的用户名或者密码错误" }
-    }else{
-      validatePassword(authorD.password,o.encrypted_password,function(err,isValidatePass){
-        if (isValidatePass){
-          ctx.body = {success:true}
-				}	else{
-          ctx.body = {"errorMessage": "您的用户名或者密码错误" }
-				}
-      })
-    }
-  })
+  const authorE = await Author.findOne({'email':authorD.email})
+  if(authorE){
+    validatePassword(authorD.password,authorE.encrypted_password,function(err,isValidatePass){
+      if (isValidatePass){
+        ctx.body = {success:true}
+      }	else{
+        ctx.body = {"errorMessage": "您的用户名或者密码错误" }
+      }
+    })
+  }else{
+    ctx.body = {"errorMessage": "您的用户名或者密码错误" }
+  }
 })
-router.post('/authors/sign-up',function(ctx,next){
+router.post('/authors/sign-up',async (ctx,next)=>{
   const authorD = ctx.request.body.author;
-  Author.findOne({'name':authorD.name},function(e,o){
-    if(o){
-      ctx.body = 'ssjsjj'
+  const authorN = await Author.findOne({'name':authorD.name})
+  if(authorN){
+    ctx.body = {"errorMessage": "用户已存在" }
+  }else{
+    const authorE = await Author.findOne({'email':authorD.email})
+    if(authorE){
+      ctx.body = {"errorMessage": "邮箱已存在" }
     }else{
-      Author.findOne({'email':authorD.email},function(e1,o1){
-        if(o1){
-          ctx.body = {"errorMessage": "邮箱已存在" }
-        }else{
-          const author = new Author({
-            name:authorD.name,
-            email:authorD.email,
-            encrypted_password:saltAndHash(authorD.password),
-            access_token:generateSalt()
-          })
-          author.save(function(err,data){
-            if(err){
-              ctx.body = {"errorMessage":"创建用户失败"}
-            }else{
-              ctx.body = {"accessToken":data.access_token}
-            }
-          })
-        }
-      })
+      const data = await Author.create({
+        name:authorD.name,
+        email:authorD.email,
+        encrypted_password:saltAndHash(authorD.password),
+        access_token:generateSalt()
+      });
+      if(data._id){
+        ctx.body = {"accessToken":data.access_token}
+      }
     }
-  })
+  }
 })
 router.delete('/authors/sign-out',function(ctx){
   ctx.body = {success:true}
 })
 //关于作者
 router.get('/authors/edit',async (ctx,next)=>{
-  ctx.body = await Author.findOne({access_token:ctx.request.get("Authorization")}).select('name description introduction image');
-  // Author.findOne({access_token:ctx.request.get("Authorization")},'name description introduction image ',function(err,data){
-  //   console.log(err,data)
-  //   if(err){
-  //     ctx.body = {"errorMessage":"编辑用户出错"}
-  //     ctx.status = 400
-  //   }else{
-  //     ctx.body = {name:data.name,description:data.description,introduction:data.introduction,image:data.image}
-  //   }
-  // })
+  const data = await Author.findOne({access_token:ctx.request.get("Authorization")},'name description introduction image')
+  if(data){
+    ctx.body = data
+  }
 })
-router.patch('/authors/',function(ctx,next){
+router.patch('/authors/',async (ctx,next)=>{
   const authorD = ctx.request.body.author;
-  Author.findOneAndUpdate({access_token:ctx.request.get("Authorization")},authorD,{},function(err,data){
-    if(data){
-      ctx.body = {success:true}
-    }
-  })
+  const data = await Author.findOneAndUpdate(
+    {access_token:ctx.request.get("Authorization")},
+    { $set: authorD },
+    {new: true}
+  )
+  if(data){
+    ctx.body = {success:true}
+  }
 })
 var generateSalt = function(){
 	var set = '0123456789abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ';
