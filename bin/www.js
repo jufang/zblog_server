@@ -3,7 +3,7 @@
 import app from '../server';
 import {connectDatabase} from '../server/db';
 import {config} from '../server/config';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 9001;
 
 (async() => {
     try {
