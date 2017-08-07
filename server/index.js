@@ -10,8 +10,13 @@ import {config} from './config';
 const app = new Koa();
 const session = require('koa-session')
 const mongoose = require('mongoose');
-const MongooseStore = require('koa-session-mongoose');;
-mongoose.connect(config.DEVELOPMENT);
+const MongooseStore = require('koa-session-mongoose');
+if(process.env.BLOGEND=='production'){
+	mongoose.connect(config.PRODUCT);
+}else{
+	mongoose.connect(config.DEVELOPMENT);
+}
+
 
 app.use(logger());
 app.use(cors());

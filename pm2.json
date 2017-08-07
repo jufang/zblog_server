@@ -10,6 +10,8 @@
     "merge_logs":true,
     "watch":false,
     "exec_mode"  : "cluster_mode",
-    "NODE_ENV":"production"
+    "env":{
+      "BLOGEND":"production"
+    }
   }]
 }

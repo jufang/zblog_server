@@ -7,7 +7,11 @@ const port = process.env.PORT || 3000;
 
 (async() => {
     try {
-        const info = await connectDatabase(config.DEVELOPMENT);
+        if(process.env.BLOGEND=='production'){
+            await connectDatabase(config.PRODUCT);
+        }else{
+            await connectDatabase(config.DEVELOPMENT)
+        }
     } catch (error) {
         console.error('Unable to connect to database');
     }
