@@ -43,8 +43,8 @@ router.post('/posts',async (ctx,next)=>{
     title:body.title,
     published_at:body.published_at,
     lead_sentence:body.lead_sentence,
-    items:body.items_attributes.map((v)=>{
-      return _.omit(v,['is_new','editing'])
+    items:body.items_attributes.map((v,k)=>{
+      return _.omit(_.assign(v,{'id':k}),['is_new','editing'])
     })
   })
   for(var v of body.taggings_attributes){

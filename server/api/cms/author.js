@@ -14,7 +14,7 @@ router.post('/authors/sign-in',async (ctx,next)=>{
   if(authorE){
     validatePassword(authorD.password,authorE.encrypted_password,function(err,isValidatePass){
       if (isValidatePass){
-        ctx.body = {success:true}
+        ctx.body = {"accessToken":authorE.access_token}
       }	else{
         ctx.body = {"errorMessage": "您的用户名或者密码错误" }
       }

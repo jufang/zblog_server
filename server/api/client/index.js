@@ -9,14 +9,16 @@ const router = new Router();
 
 //关于作者
 router.get('/about',async (ctx,next)=>{
-  const data = await Author.findOne({access_token:'DMN1QhOfwS'},'name description introduction image')
+  const data = await Author.findOne({},'name description introduction image')
   if(data){
     ctx.body = data
   }
 })
 router.get('/home',async (ctx,next)=>{
   const author = await Author.findOne({})
-  const post = await Post.find({accepted:true,published_at:{'$lt':+new Date()}}).sort({_id:-1}).limit(3).select('title lead_sentence')
+  //暂时放开发布日期的限制
+  //const post = await Post.find({accepted:true,published_at:{'$lt':+new Date()}}).sort({_id:-1}).limit(3).select('title lead_sentence')
+  const post = await Post.find({}).sort({_id:-1}).limit(3).select('title lead_sentence')
   ctx.body = {
     introduction:author.introduction,
     latestPosts:post
