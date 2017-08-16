@@ -2,7 +2,7 @@
   "apps" : [{
     "name"       : "blog_backend1.0.0",
     "script"     : "./bin/entry.js",
-    "instances"  : 2,
+    "instances"  : 1,
     "error_file" : "/bloglogs/err_back.log",
     "out_file"   : "/bloglogs/out_back.log",
     "pid_file"   : "/bloglogs/pid_back.log",
