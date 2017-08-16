@@ -17,7 +17,6 @@ if(process.env.BLOGEND=='production'){
 	mongoose.connect(config.DEVELOPMENT);
 }
 
-
 app.use(logger());
 app.use(cors());
 app.use(body());
