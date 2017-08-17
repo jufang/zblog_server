@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/entry",
-    "prod:start": "pm2 start pm2.json",
-    "prod:stop": "pm2 delete blog_backend1.0.0"
+    "prod:start": "pm2 start ./bin/entry.js",
+    "prod:stop": "pm2 stop entry"
   },
   "keywords": [
     "koa",
