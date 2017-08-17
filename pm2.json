@@ -5,10 +5,8 @@
     "error_file" : "/bloglogs/err_back.log",
     "out_file"   : "/bloglogs/out_back.log",
     "pid_file"   : "/bloglogs/pid_back.log",
-    "max_memory_restart":"200M",
     "merge_logs":true,
     "watch":false,
-    "exec_mode"  : "cluster_mode",
     "env":{
       "BLOGEND":"production"
     }
