@@ -6,7 +6,10 @@
     "out_file"   : "/bloglogs/out_back.log",
     "pid_file"   : "/bloglogs/pid_back.log",
     "merge_logs":true,
-    "watch":false,
+    "watch":[
+        "server",
+        "bin"
+    ],
     "env":{
       "BLOGEND":"production"
     }
