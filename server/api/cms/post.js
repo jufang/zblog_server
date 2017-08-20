@@ -39,12 +39,13 @@ router.get('/posts/new',async (ctx,next)=>{
 //创建文章/posts
 router.post('/posts',async (ctx,next)=>{
   const body = ctx.request.body.post;
+  const uid = new Date() - 0
   const curPost = new Post({
     title:body.title,
     published_at:body.published_at,
     lead_sentence:body.lead_sentence,
     items:body.items_attributes.map((v,k)=>{
-      return _.omit(_.assign(v,{'id':k}),['is_new','editing'])
+      return _.omit(v,['is_new','editing'])
     })
   })
   for(var v of body.taggings_attributes){
