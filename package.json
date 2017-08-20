@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./bin/entry",
-    "prod:start": "pm2 start ./bin/entry.js",
+    "prod:start": "pm2 start ./bin/entry.js --watch='bin server'",
     "prod:stop": "pm2 stop entry"
   },
   "keywords": [
