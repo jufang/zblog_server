@@ -24,9 +24,9 @@ app.use(session({
 	key: config.SESSION_SECRET,
 	maxAge: 86400000,
 	store:new MongooseStore(),
-	overwrite: true, /** (boolean) can overwrite or not (default true) */
-	httpOnly: true, /** (boolean) httpOnly or not (default true) */
-	signed: true, /** (boolean) signed or not (default true) */
+	overwrite: true, 
+	httpOnly: true, 
+	signed: true, 
 	rolling: false
 },app))
 app.use(routes);

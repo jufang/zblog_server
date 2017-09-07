@@ -16,10 +16,12 @@ router.post('/authors/sign-in',async (ctx,next)=>{
       if (isValidatePass){
         ctx.body = {"accessToken":authorE.access_token}
       }	else{
+        ctx.status = 401
         ctx.body = {"errorMessage": "您的用户名或者密码错误" }
       }
     })
   }else{
+    ctx.status = 401
     ctx.body = {"errorMessage": "您的用户名或者密码错误" }
   }
 })
@@ -27,10 +29,12 @@ router.post('/authors/sign-up',async (ctx,next)=>{
   const authorD = ctx.request.body.author;
   const authorN = await Author.findOne({'name':authorD.name})
   if(authorN){
+    ctx.status = 422
     ctx.body = {"errorMessage": "用户已存在" }
   }else{
     const authorE = await Author.findOne({'email':authorD.email})
     if(authorE){
+      ctx.status = 422
       ctx.body = {"errorMessage": "邮箱已存在" }
     }else{
       const data = await Author.create({
